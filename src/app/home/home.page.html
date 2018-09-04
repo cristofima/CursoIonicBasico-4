@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Calculadora</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="home-content" padding>
+  Curso Básico Ionic
+  <p>Operaciones Básicas</p>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Número 1</ion-label>
+          <ion-input (ionChange)="changeOperacion()" [(ngModel)]="n1" type="number"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Número 2</ion-label>
+          <ion-input (ionChange)="changeOperacion()" [(ngModel)]="n2" type="number"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-item>
+    <ion-label>Operación</ion-label>
+    <ion-select (ionChange)="changeOperacion()" [(ngModel)]="operacion" ok-text="OK" cancel-text="Cancelar">
+      <ion-select-option value="1">Suma</ion-select-option>
+      <ion-select-option value="2">Resta</ion-select-option>
+      <ion-select-option value="3">Multiplicación</ion-select-option>
+      <ion-select-option value="4">División</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-button shape="round" style="text-transform: none;" (click)="mostrar()">
+    Calcular
+  </ion-button>
+  <h4 class="resultado">Resultado: {{resultado}}</h4>
+  <div *ngIf="error">
+    <h5 class="error">Inserte ambos valores</h5>
+  </div>
+</ion-content>
