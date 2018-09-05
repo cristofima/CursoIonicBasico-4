@@ -1,6 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { Storage } from "@ionic/storage";
 import { LoadingController, AlertController } from "@ionic/angular";
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  AbstractControl
+} from "@angular/forms";
 
 @Component({
   selector: "app-list",
@@ -9,33 +15,66 @@ import { LoadingController, AlertController } from "@ionic/angular";
 })
 export class ListPage implements OnInit {
   ciudades: any[] = [];
-  nombre: string = null;
-  habitantes: number = null;
+  nombreControl: AbstractControl;
+  habitantesControl: AbstractControl;
+
+  ciudadesForm: FormGroup;
 
   constructor(
     private storage: Storage,
     private loadingController: LoadingController,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private formBuilder: FormBuilder
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.initForm();
+    let loading = await this.presentLoading();
+    await loading.present();
     this.storage.get("listado").then(res => {
       if (res != null) {
         this.ciudades = res;
       }
+      loading.dismiss();
     });
   }
 
+  private initForm() {
+    this.ciudadesForm = this.formBuilder.group({
+      nombre: [
+        "",
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(20)
+        ])
+      ],
+      habitantes: [
+        "",
+        Validators.compose([
+          Validators.required,
+          Validators.min(100),
+          Validators.max(5000000)
+        ])
+      ]
+    });
+    this.nombreControl = this.ciudadesForm.controls["nombre"];
+    this.habitantesControl = this.ciudadesForm.controls["habitantes"];
+  }
+
   guardar() {
-    if (this.nombre != null && this.habitantes != null) {
+    if (
+      this.nombreControl.value != null &&
+      this.habitantesControl.value != null
+    ) {
       this.ciudades.push({
-        nombre: this.nombre,
-        habitantes: this.habitantes
+        nombre: this.nombreControl.value,
+        habitantes: this.habitantesControl.value
       });
       this.storage.set("listado", this.ciudades);
-      this.nombre = null;
-      this.habitantes = null;
       this.presentAlert("Valores insertados");
+      this.ciudadesForm.get("nombre").setValue(null);
+      this.habitantesControl.setValue(null);
     } else {
       this.presentAlert("Inserte ambos valores");
     }
@@ -48,5 +87,12 @@ export class ListPage implements OnInit {
       buttons: ["OK"]
     });
     await alert.present();
+  }
+
+  private async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: "Cargando"
+    });
+    return loading;
   }
 }

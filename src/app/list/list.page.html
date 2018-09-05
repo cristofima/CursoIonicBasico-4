@@ -5,25 +5,28 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label position="floating">Nombre</ion-label>
-          <ion-input [(ngModel)]="nombre" type="text"></ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item>
-          <ion-label position="floating">Habitantes</ion-label>
-          <ion-input [(ngModel)]="habitantes" type="number"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-button expand="full" (click)="guardar()">
-    Guardar
-  </ion-button>
+  <form [formGroup]="ciudadesForm" (ngSubmit)="guardar()">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input formControlName="nombre" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Habitantes</ion-label>
+            <ion-input formControlName="habitantes" type="number"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-button expand="full" type="submit" [disabled]="!ciudadesForm.valid">
+      Guardar
+    </ion-button>
+  </form>
+
   <ion-list *ngFor="let c of ciudades">
     <ion-item>
       <ion-label>{{c.nombre}}</ion-label>
