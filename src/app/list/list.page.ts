@@ -1,6 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { Storage } from "@ionic/storage";
-import { LoadingController, AlertController } from "@ionic/angular";
+import {
+  LoadingController,
+  AlertController,
+  ItemSliding
+} from "@ionic/angular";
 import {
   FormBuilder,
   FormGroup,
@@ -96,7 +100,8 @@ export class ListPage implements OnInit {
     return loading;
   }
 
-  async confirmDelete(ciudad, index: number) {
+  async confirmDelete(ciudad, index: number, slidingItem: ItemSliding) {
+    slidingItem.close();
     const alert = await this.alertController.create({
       header: "Confirmar",
       message: "Está seguro de eliminar la ciudad " + ciudad.nombre,
