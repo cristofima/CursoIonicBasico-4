@@ -95,4 +95,28 @@ export class ListPage implements OnInit {
     });
     return loading;
   }
+
+  async confirmDelete(ciudad, index: number) {
+    const alert = await this.alertController.create({
+      header: "Confirmar",
+      message: "Está seguro de eliminar la ciudad " + ciudad.nombre,
+      buttons: [
+        {
+          text: "Cancelar",
+          role: "cancel",
+          handler: blah => {}
+        },
+        {
+          text: "Aceptar",
+          role: "OK",
+          handler: blah => {
+            this.ciudades.splice(index, 1);
+            this.storage.set("listado", this.ciudades);
+            this.presentAlert("Ciudad eliminada");
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
 }
