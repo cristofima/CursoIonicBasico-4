@@ -11,9 +11,11 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 
+import { EditPage } from "./edit/edit.page";
+
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, EditPage],
+  entryComponents: [EditPage],
   imports: [
     BrowserModule,
     ReactiveFormsModule,

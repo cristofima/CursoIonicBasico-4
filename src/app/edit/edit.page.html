@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Editar Ciudad</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="ciudadesForm" (ngSubmit)="guardar()">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item [ngClass]="{'error':( !nombreControl.valid 
+          && nombreControl.touched)}">
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input formControlName="nombre" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item [ngClass]="{'error':( !habitantesControl.valid 
+          && habitantesControl.touched)}">
+            <ion-label position="floating">Habitantes</ion-label>
+            <ion-input formControlName="habitantes" type="number"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button color="warning" expand="full" type="button" (click)="regresar()">
+            Regresar
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button expand="full" type="submit" [disabled]="!ciudadesForm.valid">
+            Guardar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

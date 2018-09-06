@@ -3,7 +3,8 @@ import { Storage } from "@ionic/storage";
 import {
   LoadingController,
   AlertController,
-  ItemSliding
+  ItemSliding,
+  ModalController
 } from "@ionic/angular";
 import {
   FormBuilder,
@@ -11,6 +12,8 @@ import {
   Validators,
   AbstractControl
 } from "@angular/forms";
+
+import { EditPage } from "../edit/edit.page";
 
 @Component({
   selector: "app-list",
@@ -28,7 +31,8 @@ export class ListPage implements OnInit {
     private storage: Storage,
     private loadingController: LoadingController,
     private alertController: AlertController,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private modalCtrl: ModalController
   ) {}
 
   async ngOnInit() {
@@ -123,5 +127,14 @@ export class ListPage implements OnInit {
       ]
     });
     await alert.present();
+  }
+
+  async edit(c, i: number, slidingItem: ItemSliding) {
+    slidingItem.close();
+    const modal = await this.modalCtrl.create({
+      component: EditPage,
+      componentProps: { ciudad: c }
+    });
+    await modal.present();
   }
 }
