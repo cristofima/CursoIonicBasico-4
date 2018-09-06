@@ -12,6 +12,9 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 
 import { EditPage } from "./edit/edit.page";
+import { SQLite } from "@ionic-native/sqlite/ngx";
+
+import { LocalDatabaseService } from "./services/local-database.service";
 
 @NgModule({
   declarations: [AppComponent, EditPage],
@@ -26,6 +29,8 @@ import { EditPage } from "./edit/edit.page";
   providers: [
     StatusBar,
     SplashScreen,
+    SQLite,
+    LocalDatabaseService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

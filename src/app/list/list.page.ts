@@ -129,12 +129,19 @@ export class ListPage implements OnInit {
     await alert.present();
   }
 
-  async edit(c, i: number, slidingItem: ItemSliding) {
+  async edit(c, index: number, slidingItem: ItemSliding) {
     slidingItem.close();
     const modal = await this.modalCtrl.create({
       component: EditPage,
       componentProps: { ciudad: c }
     });
     await modal.present();
+    await modal.onDidDismiss().then(res => {
+      if (res.data != null) {
+        this.ciudades[index] = res.data;
+        this.storage.set("listado", this.ciudades);
+        this.presentAlert("Valores actualizados");
+      }
+    });
   }
 }

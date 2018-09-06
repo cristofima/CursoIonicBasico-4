@@ -28,6 +28,9 @@ export class EditPage implements OnInit {
 
   ngOnInit() {
     this.initForm();
+    let ciudad = this.navParams.get("ciudad");
+    this.nombreControl.setValue(ciudad.nombre);
+    this.habitantesControl.setValue(ciudad.habitantes);
   }
 
   private initForm() {
@@ -57,5 +60,11 @@ export class EditPage implements OnInit {
     this.modalCtrl.dismiss();
   }
 
-  guardar() {}
+  guardar() {
+    let ciudad = {
+      nombre: this.nombreControl.value,
+      habitantes: this.habitantesControl.value
+    };
+    this.modalCtrl.dismiss(ciudad);
+  }
 }
