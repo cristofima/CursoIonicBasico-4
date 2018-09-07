@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Actividades</ion-title>
+    <ion-buttons slot="end">
+      <ion-button shape="round" color="primary" fill="solid" (click)="goCreate()">
+        <ion-icon ios="ios-add" md="md-add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="list-activities" padding>
+  <ion-card *ngFor="let note of listado">
+    <ion-card-content [class]="note.prioridad">
+      <ion-card-title>
+        <b>{{note.titulo}}</b>
+      </ion-card-title>
+      <b>{{ note.fecha |date: 'dd/MM/yyyy HH:mm'}} </b>
+
+      <p style="text-align:justify" small>{{note.descripcion}}</p>
+    </ion-card-content>
+    <ion-item>
+      <ion-button fill="solid" slot="end" color="danger">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+      <ion-button fill="solid" slot="end" color="success">
+        <ion-icon ios="ios-create-outline" md="ios-create"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-card>
+</ion-content>

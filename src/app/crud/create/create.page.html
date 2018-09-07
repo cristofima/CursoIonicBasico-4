@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Crear Actividad</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <ion-label position="floating">Actividad</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Descripción</ion-label>
+    <ion-textarea rows="6"></ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-label>Fecha</ion-label>
+    <ion-datetime display-format="DD/MM/YYYY HH:mm" cancelText="Cancelar" doneText="OK"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>Prioridad</ion-label>
+    <ion-select ok-text="OK" cancel-text="Cancelar">
+      <ion-select-option value="low">Baja</ion-select-option>
+      <ion-select-option value="half">Media</ion-select-option>
+      <ion-select-option value="high">Alta</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-button shape="round" expand="full">
+    Guardar
+  </ion-button>
+</ion-content>

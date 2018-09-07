@@ -7,7 +7,7 @@ import { FormsModule } from "@angular/forms";
 import { TabsPageRoutingModule } from "./tabs.router.module";
 
 import { TabsPage } from "./tabs.page";
-import { ContactPageModule } from "../contact/contact.module";
+import { ListActivitiesPageModule } from "../crud/list-activities/list-activities.module";
 import { ListPageModule } from "../list/list.module";
 import { HomePageModule } from "../home/home.module";
 
@@ -19,7 +19,7 @@ import { HomePageModule } from "../home/home.module";
     TabsPageRoutingModule,
     HomePageModule,
     ListPageModule,
-    ContactPageModule
+    ListActivitiesPageModule
   ],
   declarations: [TabsPage]
 })

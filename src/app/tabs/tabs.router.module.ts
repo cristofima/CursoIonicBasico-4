@@ -4,7 +4,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { TabsPage } from "./tabs.page";
 import { HomePage } from "../home/home.page";
 import { ListPage } from "../list/list.page";
-import { ContactPage } from "../contact/contact.page";
+import { ListActivitiesPage } from "../crud/list-activities/list-activities.page";
 
 const routes: Routes = [
   {
@@ -27,9 +27,9 @@ const routes: Routes = [
         component: ListPage
       },
       {
-        path: "contact",
-        outlet: "contact",
-        component: ContactPage
+        path: "activities",
+        outlet: "activities",
+        component: ListActivitiesPage
       }
     ]
   },
