@@ -10,21 +10,24 @@
 </ion-header>
 
 <ion-content class="list-activities" padding>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" refreshingSpinner="circles" refreshingText="Cargando ...">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-card *ngFor="let note of listado">
-    <ion-card-content [class]="note.prioridad">
+    <ion-card-content [class]="note.priority">
       <ion-card-title>
-        <b>{{note.titulo}}</b>
+        <b>{{note.title}}</b>
       </ion-card-title>
-      <b>{{ note.fecha |date: 'dd/MM/yyyy HH:mm'}} </b>
+      <b>{{ note.date | date: "dd/MM/yyyy HH:mm"}} </b>
 
-      <p style="text-align:justify" small>{{note.descripcion}}</p>
+      <p style="text-align:justify" small>{{note.description}}</p>
     </ion-card-content>
     <ion-item>
       <ion-button fill="solid" slot="end" color="danger">
         <ion-icon name="trash"></ion-icon>
       </ion-button>
       <ion-button fill="solid" slot="end" color="success">
-        <ion-icon ios="ios-create-outline" md="ios-create"></ion-icon>
+        <ion-icon ios="ios-create" md="md-create"></ion-icon>
       </ion-button>
     </ion-item>
   </ion-card>

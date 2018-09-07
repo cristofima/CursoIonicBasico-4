@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { NavController } from "@ionic/angular";
+import { Router } from "@angular/router";
+import { AlertController } from "@ionic/angular";
+import { LocalDatabaseService } from "../../services/local-database.service";
 
 @Component({
   selector: "app-list-activities",
@@ -7,35 +9,51 @@ import { NavController } from "@ionic/angular";
   styleUrls: ["./list-activities.page.scss"]
 })
 export class ListActivitiesPage implements OnInit {
-  listado: any[] = [];
+  listado: any = [];
 
-  constructor(private navCtrl: NavController) {}
+  constructor(
+    public router: Router,
+    private localDB: LocalDatabaseService,
+    private alertCtrl: AlertController
+  ) {}
 
   ngOnInit() {
-    this.listado.push({
-      titulo: "Test",
-      prioridad: "low",
-      fecha: 1528520404812,
-      descripcion:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dui risus, sagittis nec metus et, congue iaculis massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. "
-    });
-    this.listado.push({
-      titulo: "Test 2",
-      prioridad: "high",
-      fecha: 1539117000000,
-      descripcion:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dui risus, sagittis nec metus et, congue iaculis massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. "
-    });
-    this.listado.push({
-      titulo: "Test 3",
-      prioridad: "half",
-      fecha: 1520698500000,
-      descripcion:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas dui risus, sagittis nec metus et, congue iaculis massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. "
-    });
+    this.getList();
+  }
+
+  doRefresh(event) {
+    this.getList(event);
   }
 
   goCreate() {
-    this.navCtrl.navigateForward("/create");
+    this.router.navigate(["create"]);
+  }
+
+  private getList(event?) {
+    this.localDB
+      .getList()
+      .then(res => {
+        this.listado = res;
+        this.stopRefresh(event);
+      })
+      .catch(e => {
+        this.stopRefresh(event);
+        this.presentAlert(e);
+      });
+  }
+
+  private stopRefresh(event) {
+    if (event) {
+      event.target.complete();
+    }
+  }
+
+  async presentAlert(texto: string) {
+    const alert = await this.alertCtrl.create({
+      header: "Alerta",
+      message: texto,
+      buttons: ["OK"]
+    });
+    await alert.present();
   }
 }
