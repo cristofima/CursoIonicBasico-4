@@ -21,7 +21,7 @@ export class CreatePage implements OnInit {
 
   ngOnInit() {
     // De esta forma se especifica la fecha en el componente datetime
-    // cuando hagan la edició, donde '1522613700000'
+    // cuando hagan la edición, donde '1522613700000'
     // son los milisegundos que se recuperan de la tabla
     //this.date = new Date(1522613700000).toISOString();
   }

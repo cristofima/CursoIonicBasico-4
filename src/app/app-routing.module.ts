@@ -6,7 +6,8 @@ const routes: Routes = [
   {
     path: "create",
     loadChildren: "./crud/create/create.module#CreatePageModule"
-  }
+  },
+  { path: "edit/:id", loadChildren: "./crud/edit/edit.module#EditPageModule" }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

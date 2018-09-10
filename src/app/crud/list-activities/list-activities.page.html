@@ -26,7 +26,7 @@
       <ion-button fill="solid" slot="end" color="danger">
         <ion-icon name="trash"></ion-icon>
       </ion-button>
-      <ion-button fill="solid" slot="end" color="success">
+      <ion-button fill="solid" slot="end" (click)="edit(note.rowid)" color="success">
         <ion-icon ios="ios-create" md="md-create"></ion-icon>
       </ion-button>
     </ion-item>

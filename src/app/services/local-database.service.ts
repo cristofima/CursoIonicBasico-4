@@ -84,6 +84,23 @@ export class LocalDatabaseService {
     });
   }
 
+  public getData(id: number) {
+    return this.isReady().then(() => {
+      return this.database
+        .executeSql("select * from activities where rowid=?", [id])
+        .then(res => {
+          if (res.rows.length > 0) {
+            return res.rows.item(0);
+          } else {
+            return null;
+          }
+        })
+        .catch(e => {
+          return e;
+        });
+    });
+  }
+
   public addData(
     title: string,
     description: string,
@@ -104,6 +121,41 @@ export class LocalDatabaseService {
           } else {
             return false;
           }
+        })
+        .catch(e => {
+          return e;
+        });
+    });
+  }
+
+  public updateData(
+    id: number,
+    title: string,
+    description: string,
+    date: number,
+    priority: string
+  ) {
+    return this.isReady().then(() => {
+      return this.database
+        .executeSql(
+          "update activities set title=?,description=?,date=?,priority=? where rowid=? ",
+          [title, description, date, priority, id]
+        )
+        .then(res => {
+          return true;
+        })
+        .catch(e => {
+          return e;
+        });
+    });
+  }
+
+  public deleteData(id: number) {
+    return this.isReady().then(() => {
+      return this.database
+        .executeSql("delete from activities where rowid=? ", [id])
+        .then(res => {
+          return true;
         })
         .catch(e => {
           return e;

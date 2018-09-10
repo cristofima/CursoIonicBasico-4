@@ -29,6 +29,10 @@ export class ListActivitiesPage implements OnInit {
     this.router.navigate(["create"]);
   }
 
+  edit(id: number) {
+    this.router.navigate(["edit/" + id]);
+  }
+
   private getList(event?) {
     this.localDB
       .getList()
