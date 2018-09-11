@@ -15,6 +15,8 @@ import {
 
 import { EditPage } from "../edit/edit.page";
 
+import { ActivityValidator } from "../validators/ActivityValidator";
+
 @Component({
   selector: "app-list",
   templateUrl: "./list.page.html",
@@ -24,6 +26,7 @@ export class ListPage implements OnInit {
   ciudades: any[] = [];
   nombreControl: AbstractControl;
   habitantesControl: AbstractControl;
+  fechaControl: AbstractControl;
 
   ciudadesForm: FormGroup;
 
@@ -64,10 +67,12 @@ export class ListPage implements OnInit {
           Validators.min(100),
           Validators.max(5000000)
         ])
-      ]
+      ],
+      fecha: ["", Validators.compose([Validators.required])]
     });
     this.nombreControl = this.ciudadesForm.controls["nombre"];
     this.habitantesControl = this.ciudadesForm.controls["habitantes"];
+    this.fechaControl = this.ciudadesForm.controls["fecha"];
   }
 
   guardar() {

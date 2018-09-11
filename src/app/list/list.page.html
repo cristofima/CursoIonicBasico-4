@@ -6,24 +6,31 @@
 
 <ion-content padding>
   <form [formGroup]="ciudadesForm" (ngSubmit)="guardar()">
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-item [ngClass]="{'error':( !nombreControl.valid 
-          && nombreControl.touched)}">
-            <ion-label position="floating">Nombre</ion-label>
-            <ion-input formControlName="nombre" type="text"></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col>
-          <ion-item [ngClass]="{'error':( !habitantesControl.valid 
-          && habitantesControl.touched)}">
-            <ion-label position="floating">Habitantes</ion-label>
-            <ion-input formControlName="habitantes" type="number"></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <ion-item [ngClass]="{'error':( !nombreControl.valid 
+              && (nombreControl.touched || nombreControl.dirty))}">
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input formControlName="nombre" type="text"></ion-input>
+    </ion-item>
+    <span class="span-error" *ngIf="(nombreControl.hasError('required') && nombreControl.dirty)">Nombre es obligatorio</span>
+    <br />
+    <ion-item [ngClass]="{'error':( !habitantesControl.valid 
+                  && (habitantesControl.touched || habitantesControl.dirty))}">
+      <ion-label position="floating">Habitantes</ion-label>
+      <ion-input formControlName="habitantes" type="number"></ion-input>
+    </ion-item>
+    <span class="span-error" *ngIf="(habitantesControl.hasError('required') && habitantesControl.dirty)">Habitantes es
+      obligatorio</span>
+    <span class="span-error" *ngIf="(habitantesControl.hasError('min') && habitantesControl.dirty)">Mínimo 100
+      habitantes</span>
+    <span class="span-error" *ngIf="(habitantesControl.hasError('max') && habitantesControl.dirty)">Máximo 5000000
+      habitantes</span>
+    <ion-item [ngClass]="{'error':( !fechaControl.valid
+    && (fechaControl.touched || fechaControl.dirty))}">
+      <ion-label>Fecha</ion-label>
+      <ion-datetime formControlName="fecha" display-format="DD/MM/YYYY" cancelText="Cancelar" doneText="OK"></ion-datetime>
+    </ion-item>
+    <span class="span-error" *ngIf="(fechaControl.hasError('actual') && fechaControl.dirty)">La fecha es
+      mayor a la actual</span>
     <ion-button expand="full" type="submit" [disabled]="!ciudadesForm.valid">
       Guardar
     </ion-button>
@@ -32,7 +39,7 @@
   <ion-list>
     <ion-item-sliding *ngFor="let c of ciudades; let i=index" #slidingItem>
       <ion-item>
-        <ion-label>{{c.nombre | lower}}</ion-label>
+        <ion-label>{{c.nombre}}</ion-label>
         <ion-label>{{c.habitantes}}</ion-label>
       </ion-item>
       <ion-item-options side="end">

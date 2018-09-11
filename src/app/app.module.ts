@@ -14,6 +14,7 @@ import { AppComponent } from "./app.component";
 import { EditPage } from "./edit/edit.page";
 import { SQLite } from "@ionic-native/sqlite/ngx";
 
+import { ActivityValidator } from "./validators/ActivityValidator";
 import { LocalDatabaseService } from "./services/local-database.service";
 
 @NgModule({
@@ -30,6 +31,7 @@ import { LocalDatabaseService } from "./services/local-database.service";
     StatusBar,
     SplashScreen,
     SQLite,
+    ActivityValidator,
     LocalDatabaseService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
