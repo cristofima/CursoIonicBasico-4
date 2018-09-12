@@ -15,7 +15,7 @@ import {
 
 import { EditPage } from "../edit/edit.page";
 
-import { ActivityValidator } from "../validators/ActivityValidator";
+import { dateValidator } from "../validators/date-validator";
 
 @Component({
   selector: "app-list",
@@ -65,10 +65,11 @@ export class ListPage implements OnInit {
         Validators.compose([
           Validators.required,
           Validators.min(100),
+          Validators.email,
           Validators.max(5000000)
         ])
       ],
-      fecha: ["", Validators.compose([Validators.required])]
+      fecha: ["", Validators.compose([Validators.required, dateValidator()])]
     });
     this.nombreControl = this.ciudadesForm.controls["nombre"];
     this.habitantesControl = this.ciudadesForm.controls["habitantes"];
