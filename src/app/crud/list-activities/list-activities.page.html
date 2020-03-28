@@ -16,9 +16,9 @@
   <ion-card *ngFor="let note of listado">
     <ion-card-content [class]="note.priority">
       <ion-card-title>
-        <b>{{note.title}}</b>
+        <strong>{{note.title}}</strong>
       </ion-card-title>
-      <b>{{ note.date | date: "dd/MM/yyyy HH:mm"}} </b>
+      <strong>{{ note.date | date: "dd/MM/yyyy HH:mm"}} </strong>
 
       <p style="text-align:justify" small>{{note.description}}</p>
     </ion-card-content>
